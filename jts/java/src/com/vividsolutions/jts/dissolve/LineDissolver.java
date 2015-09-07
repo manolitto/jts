@@ -101,14 +101,17 @@ public class LineDissolver
       this.factory = lineString.getFactory();
     }
     CoordinateSequence seq = lineString.getCoordinateSequence();
+    boolean first = true;
     for (int i = 1; i < seq.size(); i++) {
       DissolveHalfEdge e = (DissolveHalfEdge) graph.addEdge(seq.getCoordinate(i-1), seq.getCoordinate(i));
       /**
        * Record source initial segments, so that they can be reflected in output when needed
        * (i.e. during formation of isolated rings)
        */
-      if (i == 1)
+      if (e != null && first) {
         e.setStart();
+        first = false;
+      }
     }
   }
   
