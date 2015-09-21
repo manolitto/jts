@@ -86,7 +86,7 @@ class EdgeRing {
       
       testPt = CoordinateArrays.ptNotInList(testRing.getCoordinates(), tryShellRing.getCoordinates());
       boolean isContained = false;
-      if (CGAlgorithms.isPointInRing(testPt, tryShellRing.getCoordinates()) )
+      if (testPt != null && CGAlgorithms.isPointInRing(testPt, tryShellRing.getCoordinates()) )
         isContained = true;
 
       // check if this new containing ring is smaller than the current minimum ring
@@ -233,7 +233,7 @@ class EdgeRing {
 
   /**
    * Adds a hole to the polygon formed by this ring.
-   * @param hole the {@link LinearRing} forming the hole.
+   * @param holeER  the {@link LinearRing} forming the hole.
    */
   public void addHole(EdgeRing holeER) {
     holeER.setShell(this);
